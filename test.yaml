@@ -1,5 +1,0 @@
-openapi: "3.0.1"
-info:
-  title: "Swagger XSS"
-  description: "<img src=x onerror=\"alert('XSS teste')\">"
-paths: {}
