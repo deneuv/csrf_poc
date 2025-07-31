@@ -1,3 +1,0 @@
-# csrf_poc
-
-asd
